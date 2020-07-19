@@ -1,9 +1,9 @@
-//O router permite separar as rotas em outro file
-const { Router } = require('express');
+// O router permite separar as rotas em outro file
+const { Router } = require("express");
 
 const routes = new Router();
 
-routes.get('/', (request, response) => {
-    return response.json({message: 'Hello World'})
-});
-export default routes;    
+routes.get("/", (request, response) =>
+  response.json({ message: "Hello World" })
+);
+export default routes;
