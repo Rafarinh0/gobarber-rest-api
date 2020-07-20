@@ -1,16 +1,10 @@
 // O router permite separar as rotas em outro file
 const { Router } = require("express");
-import User from './app/models/User';
+
+import UserController from './app/controllers/UserController';
 
 const routes = new Router();
 
-routes.get("/", async (request, response) => {
-  const user = await User.create({
-    name: 'Rafael Marinho',
-    email: 'rafael@gmail.com',
-    password_hash: '2764287346',
-  });
+routes.post('/users', UserController.store);
 
-  return response.json(user);
-});
 export default routes;
