@@ -25,6 +25,10 @@ class User extends Model {
         //nesse caso, antes de um usuário ser salvo no database...
         return this;
     }
+
+    checkPassword(password) {
+        return bcrypt.compare(password, this.password_hash);
+    }//ver se as senhas batem
 }
 
 export default User;
