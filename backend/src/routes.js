@@ -1,5 +1,5 @@
 // O router permite separar as rotas em outro file
-const { Router } = require("express");
+import { Router } from 'express';
 
 import UserController from './app/controllers/UserController';
 import SessionController from './app/controllers/SessionController';
