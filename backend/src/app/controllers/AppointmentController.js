@@ -44,6 +44,10 @@ class AppointmentController {
 
         const { provider_id, date } = request.body;
 
+        if (provider_id === request.userId) {
+            return response.status(401).json({ error: 'You can not create an appointment for yourself' })
+        }
+
         //Checar se o provider_id é um provider
 
         const isProvider = await User.findOne({
@@ -87,7 +91,6 @@ class AppointmentController {
         const user = await User.findByPk(request.userId);
         const formattedDate = format(hourStart, "'dia' dd 'de' MMMM', às' H:mm'h'", { locale: pt });
 
-        console.log(request.userId);
         await Notification.create({
             content: `Novo agendamento de ${user.name} para ${formattedDate}`,
             user: provider_id,
