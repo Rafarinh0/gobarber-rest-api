@@ -1,3 +1,5 @@
+import 'dotenv/config';
+
 // Estrutura da aplicação
 import express from "express";
 import path from 'path';
@@ -35,8 +37,12 @@ class App {
 
   exceptionHandler() {
     this.server.use(async (error, request, response, next) => {
-      const errors = await new Youch(error, request).toJSON();
-      return response.status(500).json(errors);
+      if (process.env.NODE_ENV === 'development') {
+        const errors = await new Youch(error, request).toJSON();
+        return response.status(500).json(errors);
+      }
+
+      return response.status(500).json({ error: 'Internal server error' })
     })
   }
 }
